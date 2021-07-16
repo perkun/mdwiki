@@ -5,13 +5,12 @@ from jinja2 import Environment, FileSystemLoader
 import shutil
 import os
 import argparse
+import pkg_resources
 
 from libmdwiki.utils import mkdir, rmdir
 from libmdwiki.Site import Site
 
 
-# TODO move this to configuration or something
-TEMPLATES_DIR = '/home/perkun/wiki/templates'
 
 parser = argparse.ArgumentParser()
 parser.add_argument("file", help="vimwiki file")
@@ -22,7 +21,8 @@ args = parser.parse_args()
 
 
 # templates
-file_loader = FileSystemLoader(TEMPLATES_DIR)
+templates_dir = pkg_resources.resource_filename('libmdwiki', 'data/templates')
+file_loader = FileSystemLoader(templates_dir)
 env = Environment(loader=file_loader)
 # env.add_extension(MarkdownExtension)
 
@@ -31,7 +31,7 @@ rmdir(args.outdir)
 mkdir(args.outdir)
 
 if not os.path.exists(args.outdir + "/static"):
-    shutil.copytree(TEMPLATES_DIR + "/static", args.outdir + "/static")
+    shutil.copytree(templates_dir + "/static", args.outdir + "/static")
 
 
 if os.path.dirname(args.file) != '':
@@ -40,3 +40,5 @@ if os.path.dirname(args.file) != '':
 
 site = Site(args.url, args.outdir, args.name)
 site.generate(os.path.basename(args.file), env)
+
+pkg_resources.cleanup_resources(force=True)

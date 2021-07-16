@@ -1,4 +1,14 @@
 from setuptools import setup, find_packages
+import os
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+extra_files = package_files('libmdwiki/data/')
 
 VERSION = '0.0.1'
 DESCRIPTION = 'Static wiki from markdown files'
@@ -20,5 +30,7 @@ setup(
             "Operating System :: MacOS :: MacOS X",
             "Operating System :: Unix"
         ],
-        scripts=['bin/mdwiki']
+        scripts=['bin/mdwiki'],
+        include_package_data=True,
+        package_data={'': extra_files},
 )

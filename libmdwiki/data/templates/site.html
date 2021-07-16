@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+
+<div class="row justify-content-center">
+	<div class="col">
+		<h2 data-toc-skip class="text-primary text-center">{{ title }}</h2>
+	</div>
+</div>
+
+
+{#<nav id="toc" class="sticky-top"></nav>#}
+
+<div class="row justify-content-center">
+	<div class="col-12 m-5">
+		{#{% markdown %}
+			{{ mdfile }}
+		{% endmarkdown %}#}
+		{{ html_content }}
+	</div>
+</div>
+
+
+
+{% endblock content %}
+
