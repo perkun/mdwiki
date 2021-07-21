@@ -1,0 +1,169 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:wght@400;700);
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
+
+$font-family-base: 'Ubuntu Mono';
+$headings-font-family: 'Ubuntu Mono';
+
+
+
+// MY COLORS DEFINITIONS
+$bg_color: #151510;
+$navicon_color: #5d5179;
+$navicon_current_color: #B29AE6;
+
+// BOOTSTRAP COLORS OVERRIDES
+$primary: #FF304F;
+//$secondary: #2e86ab;
+// $secondary: #586F7C;
+$secondary: #73B8D5;
+$success: #015668;
+$info: #0F81C7;
+$warning: #303030;
+$danger: #FF550B;
+$light: #cccccc;
+$dark: #000000;
+
+
+$card-bg: $bg_color;
+$card-border-color: $bg_color;
+
+$list-group-bg: $bg_color;
+$list-group-border-color: $bg_color;
+$list-group-hover-bg: #1C1C15;
+$list-group-color: $light;
+
+$tooltip-bg: $bg_color;
+$tooltip-color: $light;
+$tooltip-font-size: 1.5rem;
+
+
+// https://coolors.co/ff304f-151510-cccccc-4f759b-5d5179
+// https://coolors.co/ff304f-151510-cccccc-345995-606c38
+// https://coolors.co/ff304f-151510-cccccc-2e5eaa-5b4e77
+// https://coolors.co/ff304f-151510-cccccc-1f7a8c-546a7b
+
+@import "../bootstrap-5.0.2/scss/bootstrap";
+
+// Then add additional custom code here
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+	background-color: $bg_color;
+    color: #cccccc;
+}
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+	color: $primary;
+}
+
+
+
+.left-panel {
+	position: fixed;
+	left: 0;
+	width: 25%;
+	height: 100%;
+}
+
+
+.right-panel {
+	position: fixed;
+	right: 0;
+	min-width: 5rem;
+	width: 8.333333333%;
+	height: 100%;
+	z-index: 2000;
+}
+
+@media (max-width: 991px) {
+	.left-panel {
+		height: 30vh;
+		margin-bottom: 0;
+		position: relative;
+		width: 100%;
+	}
+}
+
+
+@media (max-width: 767px) {
+	.right-panel {
+		position: fixed;
+		bottom: 0;
+		min-height: 5rem;
+		width: 100%;
+		height: 5rem;
+		z-index: 2000;
+	}
+}
+
+.avatar {
+	border-radius: 50%;
+	width:  300px;
+	height: 300px;
+}
+
+.navicon {
+	color: $navicon_color;
+}
+
+.navicon-current {
+	color: $navicon_current_color;
+}
+
+.pub-title {
+	color: $secondary;
+}
+
+.pub-year {
+	color: $primary;
+}
+
+a {
+	text-decoration: none;
+	color: $secondary;
+}
+
+td {
+	color: $light;
+}
+
+nav[data-toggle="toc"] {
+  top: 42px;
+}
+
+
+/* small screens */
+@media (max-width: 768px) {
+  /* override stickyness so that the navigation does not follow scrolling */
+  nav[data-toggle="toc"] {
+    margin-bottom: 42px;
+    position: static;
+  }
+
+  /* PICK ONE */
+  /* don't expand nested items, which pushes down the rest of the page when navigating */
+  /*nav[data-toggle="toc"] .nav .active .nav {
+    display: none;
+  }*/
+  /* alternatively, if you *do* want the second-level navigation to be shown (as seen on this page on mobile), use this */
+
+  nav[data-toggle='toc'] .nav .nav {
+    display: block;
+  }
+
+}
+
+img {
+    max-width: 100%;
+}
+

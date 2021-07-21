@@ -47,7 +47,7 @@ class Site:
                 h_text = m.groups()[1]
 
 
-                link = f'<a data-toggle="collapse" href="#collapse{collapsable_id}" role="button" aria-expanded="true" aria-controls="collapse{collapsable_id}">'
+                link = f'<a data-bs-toggle="collapse" href="#collapse{collapsable_id}" role="button" aria-expanded="true" aria-controls="collapse{collapsable_id}">'
                 icon = '<i class="fas fa-caret-down text-secondary"></i>'
                 lines[i] = f'{link}\n<h{h_level}>{h_text}    {icon}</h{h_level}>'
                 lines[i] += '\n</a>'
