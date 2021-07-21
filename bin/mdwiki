@@ -21,8 +21,8 @@ args = parser.parse_args()
 
 
 # templates
-templates_dir = pkg_resources.resource_filename('libmdwiki', 'data/templates')
-file_loader = FileSystemLoader(templates_dir)
+pkg_data_dir = pkg_resources.resource_filename('libmdwiki', 'data')
+file_loader = FileSystemLoader(pkg_data_dir + '/templates')
 env = Environment(loader=file_loader)
 # env.add_extension(MarkdownExtension)
 
@@ -31,7 +31,7 @@ rmdir(args.outdir)
 mkdir(args.outdir)
 
 if not os.path.exists(args.outdir + "/static"):
-    shutil.copytree(templates_dir + "/static", args.outdir + "/static")
+    shutil.copytree(pkg_data_dir + "/static", args.outdir + "/static")
 
 
 if os.path.dirname(args.file) != '':
