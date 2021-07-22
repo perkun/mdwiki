@@ -33,9 +33,7 @@
 	</style>
 
 	{% if title %}
-		<title>WIKI - {{ title }} </title>
-	{% else %}
-		<title>WIKI</title>
+		<title>{{ title }} </title>
 	{% endif %}
 
 
@@ -81,7 +79,14 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand ms-5" href="{{ base_url }}/index.html">{{ name }}</a>
+
+	{% if parent_site %}
+	<a class="navbar-brand ms-5" href="{{ parent_site_url }}">
+		{{ parent_site }} <span class="text-primary">/</span>
+	</a>
+	{% endif %}
+
+	<a class="navbar-brand {% if not parent_site %}ms-5{% endif %}" href="{{ base_url }}/index.html">{{ name }}</a>
 	  <span class="nav-text text-primary">{{ bread_crums }}</span>
 </nav>
 

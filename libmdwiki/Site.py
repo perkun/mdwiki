@@ -85,7 +85,9 @@ class Site:
 
                 site = Site(self.base_url, self.output_dir, self.name)
                 site.generate(os.path.join(self.mdfile.dir, link.destination),
-                              self.template_env, self.bread_crums)
+                              self.template_env, self.bread_crums,
+                              parent_site=self.parent_site,
+                              parent_site_url=self.parent_site_url)
                 line = link.update_destination(line,
                                         Site.PATH_HASH[site.mdfile.abs_path])
 
@@ -147,7 +149,9 @@ class Site:
 
 
 
-    def generate(self, mdfile_path, template_env, bread_crums = ""):
+    def generate(self, mdfile_path, template_env, bread_crums = "", parent_site="", parent_site_url=""):
+        self.parent_site = parent_site
+        self.parent_site_url = parent_site_url
 
         self.mdfile = MdFile(mdfile_path)
 #         print(self.mdfile.content)
@@ -206,6 +210,8 @@ class Site:
                 html_content=self.out_html_file,
                 name=self.name,
                 title=self.mdfile.title,
+                parent_site=parent_site,
+                parent_site_url=parent_site_url,
                 cover=self.get_cover())
 
 

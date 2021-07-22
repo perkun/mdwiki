@@ -17,6 +17,8 @@ parser.add_argument("file", help="vimwiki file")
 parser.add_argument("--outdir",  required=True, help="output directory")
 parser.add_argument("--url",  required=True, help="base site url")
 parser.add_argument("--name",  required=True, help="name of the wiki")
+parser.add_argument("--parent-site-url", help="url of parent site (in navbar)", required=False, default="")
+parser.add_argument("--parent-site-name", help="name of parent site (in navbar)", required=False, default="")
 args = parser.parse_args()
 
 
@@ -26,19 +28,20 @@ file_loader = FileSystemLoader(pkg_data_dir + '/templates')
 env = Environment(loader=file_loader)
 # env.add_extension(MarkdownExtension)
 
+outdir = os.path.abspath(args.outdir)
 
-rmdir(args.outdir)
-mkdir(args.outdir)
+rmdir(outdir)
+mkdir(outdir)
 
-if not os.path.exists(args.outdir + "/static"):
-    shutil.copytree(pkg_data_dir + "/static", args.outdir + "/static")
+if not os.path.exists(outdir + "/static"):
+    shutil.copytree(pkg_data_dir + "/static", outdir + "/static")
 
 
 if os.path.dirname(args.file) != '':
     os.chdir(os.path.dirname(args.file))
 
 
-site = Site(args.url, args.outdir, args.name)
-site.generate(os.path.basename(args.file), env)
+site = Site(args.url, outdir, args.name)
+site.generate(os.path.basename(args.file), env, parent_site=args.parent_site_name, parent_site_url=args.parent_site_url)
 
 pkg_resources.cleanup_resources(force=True)
