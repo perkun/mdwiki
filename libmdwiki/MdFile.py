@@ -18,6 +18,7 @@ class MdFile:
         self.basename = os.path.basename(path)
         self.content = open(path).read()
         self.basename_no_ext = os.path.splitext(self.basename)[0]
+        self.type = "wiki"
 
 #         print("mdfile path:", path)
 #         print("mdfile dir:", self.dir)
@@ -42,6 +43,8 @@ class MdFile:
                 self.cover_path = front_matter['cover']
             if 'bibliography' in front_matter:
                 self.bibliography = front_matter['bibliography']
+            if 'type' in front_matter:
+                self.type = front_matter['type']
 
 
     def exec_embeded_scripts(self):

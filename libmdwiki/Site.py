@@ -148,6 +148,21 @@ class Site:
         return re.sub('^---\n([\s\S]*?)\n---', '', md_text)
 
 
+    def remove_leading_empty_lines(self, md_text):
+        lines = md_text.split('\n')
+        i = 0
+        while lines[i] == '':
+            i += 1
+
+        j = len(lines) -1
+        while lines[j] == '':
+            j -= 1
+
+        return '\n'.join(lines[i:j+1])
+
+
+
+
 
     def generate(self, mdfile_path, template_env, bread_crums = "", parent_site="", parent_site_url=""):
         self.parent_site = parent_site
@@ -202,7 +217,15 @@ class Site:
                     extensions=['markdown.extensions.extra'])
 
 
-        page_template = template_env.get_template('site.html')
+        if self.mdfile.type == "wiki":  # default value
+            page_template = template_env.get_template('site.html')
+        elif self.mdfile.type == "presentation":
+            page_template = template_env.get_template('presentation.html')
+            self.out_md_file = self.remove_leading_empty_lines(self.out_md_file)
+        else:
+            print("Contetnt type not suported")
+            return
+
         html_source = page_template.render(
                 bread_crums=self.bread_crums,
                 base_url=self.base_url,
