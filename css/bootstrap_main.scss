@@ -170,6 +170,20 @@ img {
 	margin-right: auto;
 }
 
+img:hover{
+    color: #424242;
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -ms-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+  opacity: 1;
+  transform: scale(1.8);
+  -ms-transform: scale(1.8); /* IE 9 */
+  -webkit-transform: scale(1.8); /* Safari and Chrome */
+
+}
+
 
 th, td {
 	padding: 0.5rem 1rem;
